@@ -32,11 +32,11 @@ public class ModuleService {
 		return moduleDao.create(module);
 	}
 
-	public boolean updateModuleName(Module module, String name) {
+	public Module updateModuleName(Module module, String name) {
 		return moduleDao.updateModuleName(module,name);
 	}
 	
-	public boolean delete(Module module) {
+	public Module delete(Module module) {
 		return moduleDao.delete(module);
 	}
 

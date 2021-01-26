@@ -32,11 +32,11 @@ public class NoticeService {
 		return this.noticeDao.getNoticeByPublicationDate(publicationDate);
 	}
 	
-	public boolean create(Notice notice) {
+	public Notice create(Notice notice) {
 		return this.noticeDao.create(notice);
 	}
 	
-	public boolean updateMessage(Notice notice, String message) {
+	public Notice updateMessage(Notice notice, String message) {
 		return this.noticeDao.updateMessage(notice, message);
 	}
 	
@@ -44,7 +44,7 @@ public class NoticeService {
 		return this.noticeDao.updateTitle(notice, title);
 	}
 	
-	public Notice updatePublicationDate(Notice notice, Date date) {
+	public Notice updatePublicationDate(Notice notice, String date) {
 		return this.noticeDao.updatePublicationDate(notice, date);
 	}
 	

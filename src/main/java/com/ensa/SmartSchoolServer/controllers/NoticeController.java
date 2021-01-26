@@ -38,6 +38,16 @@ public class NoticeController {
 	public Notice updateTitle(@RequestBody Notice notice,@PathVariable(name="title") String title) {
 		return noticeService.updateTitle(notice,title);
 	}
+	 
+	@RequestMapping(value = "/updateMessage/message={message}",method=RequestMethod.PUT)
+	public Notice updateMessage(@RequestBody Notice notice,@PathVariable(name="message") String message) {
+		return noticeService.updateMessage(notice,message);
+	}
+	
+	@RequestMapping(value = "/updatePublicationDate/date={date}",method=RequestMethod.PUT)
+	public Notice updatePublicationDate(@RequestBody Notice notice,@PathVariable(name="date") String date) {
+		return noticeService.updatePublicationDate(notice, date);
+	}
 	
 	@RequestMapping(value = "/delete",method=RequestMethod.POST)
 	public Notice delete(@RequestBody Notice notice) {
@@ -45,7 +55,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/create",method=RequestMethod.POST)
-	public boolean create(@RequestBody Notice notice) {
+	public Notice create(@RequestBody Notice notice) {
 		return noticeService.create(notice);
 	}
 	

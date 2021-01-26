@@ -35,16 +35,16 @@ JdbcTemplate jdbcTemplate;
 		 return module;
 			
 	}
-	public boolean updateModuleName(Module module,String name) {
+	public Module updateModuleName(Module module,String name) {
 		String sql="UPDATE MODULE SET MODULE_NAME=? WHERE MODULE_ID=?";
 		jdbcTemplate.update(sql,name,module.getModuleId());
-		return true;
+		return module;
 	}
 	
-	public boolean delete(Module module) {
+	public Module delete(Module module) {
 		String sql="DELETE FROM MODULE WHERE MODULE_ID=?";
 		jdbcTemplate.update(sql,module.getModuleId());
-		return true;
+		return module;
 	}
 	
 }

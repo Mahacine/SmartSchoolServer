@@ -36,16 +36,16 @@ JdbcTemplate jdbcTemplate;
 		return jdbcTemplate.queryForObject(sql, new NoticeMapper(), publicationDate);
 	}
 	
-	public boolean create(Notice notice) {
+	public Notice create(Notice notice) {
 		String sql = "INSERT INTO NOTICE(title, publication_date, message) VALUES(?, ?, ?)";
-		jdbcTemplate.update(sql, notice.getTitle(), notice.getPublicationDate(), notice.getMessage());
-		return true;
+		System.out.println(jdbcTemplate.update(sql, notice.getTitle(), notice.getPublicationDate(), notice.getMessage()));
+		return notice;
 	}
 	
-	public boolean updateMessage(Notice notice, String message) {
+	public Notice updateMessage(Notice notice, String message) {
 		String sql = "UPDATE NOTICE SET MESSAGE=? WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, message, notice.getNoticeId());
-		return true;
+		return notice;
 	}
 	
 	public Notice updateTitle(Notice notice, String title) {
@@ -54,7 +54,7 @@ JdbcTemplate jdbcTemplate;
 		return notice;
 	}
 	
-	public Notice updatePublicationDate(Notice notice, Date date) {
+	public Notice updatePublicationDate(Notice notice, String date) {
 		String sql = "UPDATE NOTICE SET PUBLICATION_DATE=? WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, date, notice.getNoticeId());
 		return notice;

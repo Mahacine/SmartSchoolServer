@@ -27,12 +27,12 @@ public class ModuleController {
 	}
 	
 	@RequestMapping(value = "/update/moduleName={moduleName}",method=RequestMethod.PUT)
-	public boolean updateModuleName(@RequestBody Module module, @PathVariable(name="moduleName") String name) {
+	public Module updateModuleName(@RequestBody Module module, @PathVariable(name="moduleName") String name) {
 		return moduleService.updateModuleName(module, name);
 	}
 	
 	@RequestMapping(value = "/delete",method=RequestMethod.DELETE)
-	public boolean delete(@RequestBody Module module) {
+	public Module delete(@RequestBody Module module) {
 		return moduleService.delete(module);
 	}
 	
@@ -41,11 +41,10 @@ public class ModuleController {
 		return moduleService.getModules();
 	}
 	
-	@RequestMapping(value = "/getModule",method=RequestMethod.GET)
-        //<=> GetMapping(value = "/getModule");
-	//@ResponseBody
-	public Module getModule(String name) {
-		return moduleService.getModule(name);
+	@RequestMapping(value = "/getModule/moduleName={moduleName}",method=RequestMethod.GET)
+    @ResponseBody
+	public Module getModule(@PathVariable(name="moduleName") String moduleName) {
+		return moduleService.getModule(moduleName);
 	}
 
 }
