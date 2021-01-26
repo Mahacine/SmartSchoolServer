@@ -48,22 +48,21 @@ JdbcTemplate jdbcTemplate;
 		return true;
 	}
 	
-	public boolean updateTitle(Notice notice, String title) {
+	public Notice updateTitle(Notice notice, String title) {
 		String sql = "UPDATE NOTICE SET TITLE=? WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, title, notice.getNoticeId());
-		return true;
+		return notice;
 	}
 	
-	public boolean updatePublicationDate(Notice notice, Date date) {
+	public Notice updatePublicationDate(Notice notice, Date date) {
 		String sql = "UPDATE NOTICE SET PUBLICATION_DATE=? WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, date, notice.getNoticeId());
-		return true;
+		return notice;
 	}
 	
-	public boolean delete(Notice notice) {
+	public Notice delete(Notice notice) {
 		String sql="DELETE FROM NOTICE WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, notice.getNoticeId());
-		return true;
-	}
+		return notice;
 	
-}
+}}

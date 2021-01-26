@@ -35,12 +35,12 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/updateTitle/title={title}",method=RequestMethod.PUT)
-	public boolean updateTitle(@RequestBody Notice notice,@PathVariable(name="title") String title) {
+	public Notice updateTitle(@RequestBody Notice notice,@PathVariable(name="title") String title) {
 		return noticeService.updateTitle(notice,title);
 	}
 	
 	@RequestMapping(value = "/delete",method=RequestMethod.POST)
-	public boolean delete(@RequestBody Notice notice) {
+	public Notice delete(@RequestBody Notice notice) {
 		return noticeService.delete(notice);
 	}
 	
