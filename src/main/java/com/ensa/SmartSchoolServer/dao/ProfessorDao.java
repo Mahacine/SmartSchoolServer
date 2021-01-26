@@ -23,29 +23,32 @@ JdbcTemplate jdbcTemplate;
 		return jdbcTemplate.query("select * from professor", new ProfessorMapper());
 	}
 	
-	public Professor getProfessor(String firstName,String lastName) {
-		return jdbcTemplate.queryForObject("select * from professor where professor_first_name=? and professor_last_name=?",new ProfessorMapper(),firstName,lastName);	
+	public Professor getProfessorByFirstName(String firstName) {
+		return jdbcTemplate.queryForObject("select * from professor where professor_first_name=?",new ProfessorMapper(),firstName);	
+	}
+	public Professor getProfessorByLastName(String lastName) {
+		return jdbcTemplate.queryForObject("select * from professor where professor_last_name=?",new ProfessorMapper(),lastName);	
 	}
 	
-public boolean updateProfessorFirstName(Professor professor,String firstName) {
+public Professor updateProfessorFirstName(Professor professor,String firstName) {
 		String sql="UPDATE professor SET PROFESSOR_FIRST_NAME=? WHERE PROFESSOR_ID=?";
 		jdbcTemplate.update(sql,firstName,professor.getProfessorId());
-		return true;
+		return professor;
 	}
 	
-	public boolean updateProfessorLastName(Professor professor,String lastName) {
+	public Professor updateProfessorLastName(Professor professor,String lastName) {
 		String sql="UPDATE professor SET PROFESSOR_LAST_NAME=? WHERE PROFESSOR_ID=?";
 		jdbcTemplate.update(sql,lastName,professor.getProfessorId());
-		return true;
+		return professor;
 	}
-	public boolean delete(Professor professor) {
+	public Professor delete(Professor professor) {
 		String sql="DELETE FROM PROFESSOR WHERE PROFESSOR_ID=?";
 		jdbcTemplate.update(sql,professor.getProfessorId());
-		return true;
+		return professor;
 	}
-	public boolean create(Professor professor) {
+	public Professor create(Professor professor) {
 		String sql="INSERT INTO professor (professor_first_name,professor_last_name,level_name) VALUES (?,?,?)";
 		jdbcTemplate.update(sql,professor.getProfessorFirstName(),professor.getProfessorLastName(),professor.getLevelName());
-		return true;	
+		return professor;	
 	}
 }
