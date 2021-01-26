@@ -28,10 +28,12 @@ JdbcTemplate jdbcTemplate;
 		return jdbcTemplate.queryForObject("select * from module where module_name=? ",new ModuleMapper(),name);	
 	}
 	
-	public boolean create(Module module) {
+	public Module create(Module module) {
 		String sql="INSERT INTO module (module_name,level_name) VALUES (?,?)";
-		jdbcTemplate.update(sql,module.getModuleName(),module.getLevelName());
-		return true;	
+		 jdbcTemplate.update(sql,module.getModuleName(),module.getLevelName());
+		 
+		 return module;
+			
 	}
 	public boolean updateModuleName(Module module,String name) {
 		String sql="UPDATE MODULE SET MODULE_NAME=? WHERE MODULE_ID=?";

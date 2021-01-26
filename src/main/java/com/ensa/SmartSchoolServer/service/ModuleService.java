@@ -27,7 +27,7 @@ public class ModuleService {
 		return this.moduleDao.getModule(name);
 	}
 
-	public boolean create(Module module) {
+	public Module create(Module module) {
 
 		return moduleDao.create(module);
 	}

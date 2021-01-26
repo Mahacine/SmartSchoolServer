@@ -37,6 +37,7 @@ JdbcTemplate jdbcTemplate;
 	public Admin create(Admin admin) {
 		String sql="INSERT INTO ADMIN(username,password)VALUES (?,?)";
 		jdbcTemplate.update(sql,admin.getUsername(),admin.getPassword());
+		
 		return admin;
 		
 	}
