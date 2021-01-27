@@ -28,26 +28,26 @@ public class StudentService {
 		return this.studentDao.getStudent(firstName, lastName);
 	}
 
-	public boolean create(Student student) {
+	public Student create(Student student) {
 
 		return studentDao.create(student);
 	}
 
-	public boolean updateEmail(Student student, String email) {
+	public Student updateEmail(Student student, String email) {
 
 		return studentDao.updateEmail(student, email);
 	}
 
-	public boolean updatePhoneNumber(Student student, String phoneNumber) {
+	public Student updatePhoneNumber(Student student, String phoneNumber) {
 
 		return studentDao.updatePhoneNumber(student, phoneNumber);
 	}
 
-	public boolean updatePassword(Student student, String password) {
+	public Student updatePassword(Student student, String password) {
 
 		return studentDao.updatePassword(student, password);
 	}
-	public boolean delete(Student student) {
+	public Student delete(Student student) {
 		return studentDao.delete(student);
 	}
 	
@@ -69,8 +69,13 @@ public class StudentService {
     		return studentDao.getStudentByEmail(email);
     	}
         
-        public boolean updateMaxAttempts(Student student) {
+        public Student updateMaxAttempts(Student student) {
         	return studentDao.updateMaxAttempts(student);
         }
+
+		public Student getStudentById(int id) {
+			
+			return studentDao.getStudentById(id);
+		}
 
 }
