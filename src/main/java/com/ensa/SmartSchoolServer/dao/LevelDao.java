@@ -32,24 +32,24 @@ JdbcTemplate jdbcTemplate;
 	public List<Professor> getProfessors(String levelName){
 		return jdbcTemplate.query("select * from professor,level where professor.level_name=level.level_name and level.level_name=?", new ProfessorMapper(),levelName);
 	}
-	public boolean create(Level level) {
+	public Level create(Level level) {
 		String sql="INSERT INTO level (level_name) VALUES (?)";
 		jdbcTemplate.update(sql,level.getLevelName());
-		return true;	
+		return level;	
 	}
 	
-	public boolean updateLevelName(Level level,String name) {
+	public Level updateLevelName(Level level,String name) {
 		String sql="UPDATE level SET LEVEL_NAME=? WHERE LEVEL_ID=?";
 		jdbcTemplate.update(sql,name,level.getLevelId());
-		return true;
+		return level;
 	}
-	public boolean delete(Level level) {
+	public Level delete(Level level) {
 		String sql="DELETE FROM LEVEL WHERE LEVEL_ID=?";
 		jdbcTemplate.update(sql,level.getLevelId());
-		return true;
+		return level;
 	}
+	
 	public Level getLevel(String name) {
-			
 			return jdbcTemplate.queryForObject("select * from level where level_name=? ",new LevelMapper(),name);	
 		}
 	
