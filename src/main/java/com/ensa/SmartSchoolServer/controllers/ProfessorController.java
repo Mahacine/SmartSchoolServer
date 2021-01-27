@@ -3,8 +3,11 @@ package com.ensa.SmartSchoolServer.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ensa.SmartSchoolServer.entity.Professor;
@@ -19,34 +22,44 @@ public class ProfessorController {
 	@Autowired
 	private ProfessorService professorService;
 	
+	
+	@RequestMapping(value = "/create",method=RequestMethod.POST)
+	@ResponseBody
+	public Professor createProfessor(@RequestBody Professor professor) {
+		return professorService.create(professor);
+	}
+	
 	@RequestMapping(value = "/getProfessors",method=RequestMethod.GET)
 	public List<Professor> getProfessors() {
 		return professorService.getProfessors();
 	}
 	
-	@RequestMapping(value = "/getProfessor",method=RequestMethod.POST)
-	public Professor getProfessor(String firstName,String lastName) {
-		return professorService.getProfessor(firstName, lastName);
+	@RequestMapping(value = "/getProfessorByFirstName/firstname={firstname}",method=RequestMethod.POST)
+	@ResponseBody
+	public Professor getProfessorByFirstName(@PathVariable(name="firstname") String firstName) {
+		return professorService.getProfessorByFirstName(firstName);
 	}
 	
-	@RequestMapping(value = "/updateProfessorFirstName",method=RequestMethod.PUT)
-	public boolean updateProfessorFirstName(Professor professor,String firstName) {
+	@RequestMapping(value = "/getProfessorByLastName/lastname={lastname}",method=RequestMethod.POST)
+	@ResponseBody
+	public Professor getProfessorByLastName(@PathVariable(name="lastname") String firstName) {
+		return professorService.getProfessorByLastName(firstName);
+	}
+	
+	@RequestMapping(value = "/updateProfessorFirstName/firstname={firstname}",method=RequestMethod.PUT)
+	public Professor updateProfessorFirstName(@RequestBody Professor professor, @PathVariable(name="firstname")  String firstName) {
 		return professorService.updateProfessorFirstName(professor, firstName);
 	}
 	
-	@RequestMapping(value = "/updateProfessorLastName",method=RequestMethod.PUT)
-	public boolean updateProfessorLastName(Professor professor,String lastName) {
+	@RequestMapping(value = "/updateProfessorLastName/lastname={lastname}",method=RequestMethod.PUT)
+	public Professor updateProfessorLastName(@RequestBody Professor professor, @PathVariable(name="lastname") String lastName) {
 		return professorService.updateProfessorLastName(professor, lastName);
 	}
 	
 	@RequestMapping(value = "/delete",method=RequestMethod.DELETE)
-	public boolean delete(Professor professor) {
+	public Professor delete(@RequestBody Professor professor) {
 		return professorService.delete(professor);
 	}
 	
-	@RequestMapping(value = "/create",method=RequestMethod.POST)
-	public boolean create(Professor professor) {
-		return professorService.create(professor);
-	}
 	
 }

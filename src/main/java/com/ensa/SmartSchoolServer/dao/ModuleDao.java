@@ -28,21 +28,23 @@ JdbcTemplate jdbcTemplate;
 		return jdbcTemplate.queryForObject("select * from module where module_name=? ",new ModuleMapper(),name);	
 	}
 	
-	public boolean create(Module module) {
+	public Module create(Module module) {
 		String sql="INSERT INTO module (module_name,level_name) VALUES (?,?)";
-		jdbcTemplate.update(sql,module.getModuleName(),module.getLevelName());
-		return true;	
+		 jdbcTemplate.update(sql,module.getModuleName(),module.getLevelName());
+		 
+		 return module;
+			
 	}
-	public boolean updateModuleName(Module module,String name) {
+	public Module updateModuleName(Module module,String name) {
 		String sql="UPDATE MODULE SET MODULE_NAME=? WHERE MODULE_ID=?";
 		jdbcTemplate.update(sql,name,module.getModuleId());
-		return true;
+		return module;
 	}
 	
-	public boolean delete(Module module) {
+	public Module delete(Module module) {
 		String sql="DELETE FROM MODULE WHERE MODULE_ID=?";
 		jdbcTemplate.update(sql,module.getModuleId());
-		return true;
+		return module;
 	}
 	
 }

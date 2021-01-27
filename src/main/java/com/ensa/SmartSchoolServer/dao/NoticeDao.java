@@ -36,34 +36,33 @@ JdbcTemplate jdbcTemplate;
 		return jdbcTemplate.queryForObject(sql, new NoticeMapper(), publicationDate);
 	}
 	
-	public boolean create(Notice notice) {
+	public Notice create(Notice notice) {
 		String sql = "INSERT INTO NOTICE(title, publication_date, message) VALUES(?, ?, ?)";
-		jdbcTemplate.update(sql, notice.getTitle(), notice.getPublicationDate(), notice.getMessage());
-		return true;
+		System.out.println(jdbcTemplate.update(sql, notice.getTitle(), notice.getPublicationDate(), notice.getMessage()));
+		return notice;
 	}
 	
-	public boolean updateMessage(Notice notice, String message) {
+	public Notice updateMessage(Notice notice, String message) {
 		String sql = "UPDATE NOTICE SET MESSAGE=? WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, message, notice.getNoticeId());
-		return true;
+		return notice;
 	}
 	
-	public boolean updateTitle(Notice notice, String title) {
+	public Notice updateTitle(Notice notice, String title) {
 		String sql = "UPDATE NOTICE SET TITLE=? WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, title, notice.getNoticeId());
-		return true;
+		return notice;
 	}
 	
-	public boolean updatePublicationDate(Notice notice, Date date) {
+	public Notice updatePublicationDate(Notice notice, String date) {
 		String sql = "UPDATE NOTICE SET PUBLICATION_DATE=? WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, date, notice.getNoticeId());
-		return true;
+		return notice;
 	}
 	
-	public boolean delete(Notice notice) {
+	public Notice delete(Notice notice) {
 		String sql="DELETE FROM NOTICE WHERE NOTICE_ID=?";
 		jdbcTemplate.update(sql, notice.getNoticeId());
-		return true;
-	}
+		return notice;
 	
-}
+}}
