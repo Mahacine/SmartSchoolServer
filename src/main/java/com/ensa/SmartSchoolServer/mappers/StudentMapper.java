@@ -23,6 +23,7 @@ public class StudentMapper implements RowMapper<Student> {
 		student.setBirthDate(rs.getDate("birth_date"));
 		student.setPhoneNumber(rs.getString("phone_number"));
 		student.setMaxAttempts(rs.getInt("max_attempts"));
+		
 		return student;
 	}
 

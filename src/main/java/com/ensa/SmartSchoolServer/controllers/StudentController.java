@@ -2,6 +2,7 @@ package com.ensa.SmartSchoolServer.controllers;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,32 +20,58 @@ public class StudentController {
 	private StudentService studentService;
 	
 	@RequestMapping(value = "/create",method=RequestMethod.POST)
-	public boolean create(Student student) {
+	@ResponseBody
+	public Student create(@RequestBody Student student) {
 		return studentService.create(student);
 	}
 	
-	@RequestMapping(value = "/updatePassword",method=RequestMethod.PUT)
-	public boolean updateStudentPassword(Student student, String password) {
+
+	@RequestMapping(value = "/updateEmail/email={email}",method=RequestMethod.PUT)
+	public Student updateStudentEmail(@RequestBody Student student,@PathVariable(name="email") String email) {
+		return studentService.updatePassword(student, email);
+	}
+	
+	@RequestMapping(value = "/updatePassword/password={password}",method=RequestMethod.PUT)
+	public Student updateStudentPassword(@RequestBody Student student,@PathVariable(name="password") String password) {
 		return studentService.updatePassword(student, password);
 	}
 	
-	@RequestMapping(value = "/delete",method=RequestMethod.DELETE)
-	public boolean delete(Student student) {
+	@RequestMapping(value = "/updatePhoneNumber/phoneNumber={phoneNumber}",method=RequestMethod.PUT)
+	public Student updateStudentPhoneNumber(@RequestBody Student student,@PathVariable(name="phoneNumber") String phoneNumber) {
+		return studentService.updatePhoneNumber(student, phoneNumber);
+	}
+	
+	@RequestMapping(value = "/updateMaxAttempts",method=RequestMethod.PUT)
+	public Student updateMaxAttempts(@RequestBody Student student) {
+		return studentService.updateMaxAttempts(student);
+	}
+	
+	@RequestMapping(value = "/delete",method=RequestMethod.POST)
+	public Student delete(@RequestBody Student student) {
 		return studentService.delete(student);
 	}
 	
-	@RequestMapping(value = "/getStudents",method=RequestMethod.GET)
+	@RequestMapping(value = "/getStudent/id={id}",method=RequestMethod.POST)
+	@ResponseBody
+	public Student getStudent(@PathVariable(name="id") int id) {
+		return studentService.getStudentById(id);
+	}
+	
+	
+	
+	@RequestMapping(value="/getStudents", method=RequestMethod.GET)
+	@ResponseBody
 	public List<Student> getStudents() {
 		return studentService.getStudents();
 	}
 	
-	@RequestMapping(value = "/getStudent",method=RequestMethod.GET)
-	public Student getStudents(String firstName,String lastName) {
-		return studentService.getStudent(firstName,lastName);
-	}
 	
-	@RequestMapping(value = "/getStudentByEmail",method=RequestMethod.GET)
-	public Student getStudentbyemail(String email) {
+	
+	@RequestMapping(value = "/getStudentByEmail",method=RequestMethod.POST)
+	@ResponseBody
+	public Student getStudentbyemail(@RequestBody String email) {
 		return studentService.getStudentByEmail(email);
 	}
+	
+	
 }

@@ -34,35 +34,35 @@ JdbcTemplate jdbcTemplate;
 		
 		
 	}
-	public boolean create(Student student) {
+	public Student create(Student student) {
 		String sql="INSERT INTO STUDENT(first_name,last_name,email,password,birth_date,phone_number)VALUES (?,?,?,?,?,?)";
 		jdbcTemplate.update(sql,student.getFirstName(),student.getLastName(),student.getEmail(), student.getPassword(),
 				student.getBirthDate(),student.getPhoneNumber());
-		return true;
+		return student;
 		
 	}
 	
-	public boolean updateEmail(Student student, String email) {
+	public Student updateEmail(Student student, String email) {
 		String sql="UPDATE STUDENT SET EMAIL=? WHERE STUDENT_ID=?";
 		jdbcTemplate.update(sql,email,student.getStudentId());
-		return true;
+		return student;
 	}
 	
-	public boolean updatePhoneNumber(Student student,String phoneNumber) {
+	public Student updatePhoneNumber(Student student,String phoneNumber) {
 		String sql="UPDATE STUDENT SET PHONE_NUMBER=? WHERE STUDENT_ID=?";
 		jdbcTemplate.update(sql,phoneNumber,student.getStudentId());
-		return true;
+		return student;
 	}
 	
-	public boolean updatePassword(Student student,String password) {
+	public Student updatePassword(Student student,String password) {
 		String sql="UPDATE STUDENT SET PASSWORD=? WHERE STUDENT_ID=?";
 		jdbcTemplate.update(sql,password,student.getStudentId());
-		return true;
+		return student;
 	}
-	public boolean delete(Student student) {
+	public Student delete(Student student) {
 		String sql="DELETE FROM STUDENT WHERE STUDENT_ID=?";
 		jdbcTemplate.update(sql, student.getStudentId());
-		return true;
+		return student;
 	}
 	
 	public List<Student> read(){
@@ -77,10 +77,18 @@ JdbcTemplate jdbcTemplate;
 		return jdbcTemplate.queryForObject(sql, new StudentMapper(),email);
 	}
 	
-	public boolean updateMaxAttempts(Student student) {
+	public Student updateMaxAttempts(Student student) {
 		String sql="UPDATE STUDENT SET MAX_ATTEMPTS=MAX_ATTEMPTS-1 WHERE STUDENT_ID=?";
 		jdbcTemplate.update(sql,student.getStudentId());
-		return true;
+		return student;
+	}
+
+
+
+	public Student getStudentById(int id) {
+	 return	 jdbcTemplate.queryForObject("select * from student where student_id=? ",new StudentMapper(),
+					id);
+			
 	}
 
 }
