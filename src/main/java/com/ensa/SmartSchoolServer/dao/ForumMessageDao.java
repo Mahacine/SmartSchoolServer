@@ -14,6 +14,7 @@ public class ForumMessageDao {
 
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+	
 	public ForumMessage create(ForumMessage forumMessage) {
 		
 		String sql="INSERT INTO FORUM_MESSAGE(content,message_writer) VALUES(?,?)";
