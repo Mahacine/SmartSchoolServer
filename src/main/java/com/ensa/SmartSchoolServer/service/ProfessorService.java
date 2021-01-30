@@ -41,6 +41,10 @@ public class ProfessorService {
 		return professorDao.updateProfessorLastName(professor,lastName);
 	}
 	
+	public Professor updatePassword(Professor professor,String password) {
+		return professorDao.updatePassword(professor, password);
+	}
+	
 	public Professor delete(Professor professor) {
 		return professorDao.delete(professor);
 	}

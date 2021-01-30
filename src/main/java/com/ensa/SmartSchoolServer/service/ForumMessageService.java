@@ -32,4 +32,12 @@ public class ForumMessageService {
 	public ForumMessage delete(ForumMessage forumMessage) {
 		return forumMessageDao.delete(forumMessage);
 	}
+	
+	public ForumMessage updateTopic(ForumMessage forumMessage, String title) {
+		return forumMessageDao.updateTopic(forumMessage, title);
+	}
+	
+	public ForumMessage updateContent(ForumMessage forumMessage, String content) {
+		return forumMessageDao.updateContent(forumMessage, content);
+	}
 }
