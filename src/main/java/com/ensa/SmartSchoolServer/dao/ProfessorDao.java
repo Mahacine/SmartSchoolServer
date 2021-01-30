@@ -41,13 +41,21 @@ public Professor updateProfessorFirstName(Professor professor,String firstName) 
 		jdbcTemplate.update(sql,lastName,professor.getProfessorId());
 		return professor;
 	}
+	
+	public Professor updatePassword(Professor professor,String password) {
+		String sql="UPDATE professor SET PASSWORD=? WHERE PROFESSOR_ID=?";
+		jdbcTemplate.update(sql,password,professor.getProfessorId());
+		return professor;
+	}
+	
+	
 	public Professor delete(Professor professor) {
 		String sql="DELETE FROM PROFESSOR WHERE PROFESSOR_ID=?";
 		jdbcTemplate.update(sql,professor.getProfessorId());
 		return professor;
 	}
 	public Professor create(Professor professor) {
-		String sql="INSERT INTO professor (professor_first_name,professor_last_name,level_name) VALUES (?,?,?)";
+		String sql="INSERT INTO professor (professor_first_name,professor_last_name,level_name,password) VALUES (?,?,?,?)";
 		jdbcTemplate.update(sql,professor.getProfessorFirstName(),professor.getProfessorLastName(),professor.getLevelName());
 		return professor;	
 	}

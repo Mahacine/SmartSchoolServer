@@ -56,6 +56,11 @@ public class ProfessorController {
 		return professorService.updateProfessorLastName(professor, lastName);
 	}
 	
+	@RequestMapping(value = "/updatePassword/password={password}",method=RequestMethod.PUT)
+	public Professor updatePassword(@RequestBody Professor professor, @PathVariable(name="password") String password) {
+		return professorService.updatePassword(professor, password);
+	}
+	
 	@RequestMapping(value = "/delete",method=RequestMethod.DELETE)
 	public Professor delete(@RequestBody Professor professor) {
 		return professorService.delete(professor);
